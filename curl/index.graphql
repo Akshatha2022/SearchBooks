@@ -1,0 +1,87 @@
+type AccessInfo {
+  accessViewStatus: String
+  country: String
+  embeddable: Boolean
+  epub: Epub
+  pdf: Pdf
+  publicDomain: Boolean
+  quoteSharingAllowed: Boolean
+  textToSpeechPermission: String
+  viewability: String
+  webReaderLink: String
+}
+type Epub {
+  isAvailable: Boolean
+}
+type ImageLinks {
+  smallThumbnail: String
+  thumbnail: String
+}
+type IndustryIdentifiersEntry {
+  identifier: String
+  type: String
+}
+type ItemsEntry {
+  accessInfo: AccessInfo
+  etag: String
+  id: String
+  kind: String
+  saleInfo: SaleInfo
+  searchInfo: SearchInfo
+  selfLink: String
+  volumeInfo: VolumeInfo
+}
+type PanelizationSummary {
+  containsEpubBubbles: Boolean
+  containsImageBubbles: Boolean
+}
+type Pdf {
+  acsTokenLink: String
+  isAvailable: Boolean
+}
+type ReadingModes {
+  image: Boolean
+  text: Boolean
+}
+type Root {
+  items: [ItemsEntry]
+  kind: String
+  totalItems: Int
+}
+type SaleInfo {
+  country: String
+  isEbook: Boolean
+  saleability: String
+}
+type SearchInfo {
+  textSnippet: String
+}
+type VolumeInfo {
+  allowAnonLogging: Boolean
+  authors: [String]
+  averageRating: Float
+  canonicalVolumeLink: String
+  categories: [String]
+  contentVersion: String
+  description: String
+  imageLinks: ImageLinks
+  industryIdentifiers: [IndustryIdentifiersEntry]
+  infoLink: String
+  language: String
+  maturityRating: String
+  pageCount: Int
+  panelizationSummary: PanelizationSummary
+  previewLink: String
+  printType: String
+  publishedDate: String
+  publisher: String
+  ratingsCount: Int
+  readingModes: ReadingModes
+  subtitle: String
+  title: String
+}
+
+type Query {
+  myQuery(country: String, q: String): Root
+    @rest(endpoint: "https://www.googleapis.com/books/v1/volumes")
+}
